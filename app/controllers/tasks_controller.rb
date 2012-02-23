@@ -90,6 +90,7 @@ class TasksController < ApplicationController
         @task.finished=true
       else
         @task.finished=false
+        break
       end
     end
     @task.save

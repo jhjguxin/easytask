@@ -1,12 +1,13 @@
 Easytask::Application.routes.draw do
-  match "/tasks/:task_id/items/:item_id/doitem"=> 'items#doitem'
-  match "/tasks/:task_id/items/:item_id/updateitem"=> 'items#updateitem',:method => :put
+
   resources :tasks do
     resources :items do
       resources :asset
     end
   end
-  resources :items
+  match "/tasks/:task_id/items/:item_id/doitem"=> 'items#doitem'
+  match "/tasks/:task_id/items/:item_id/updateitem"=> 'items#updateitem',:method => :put
+
   
   root :to => 'tasks#index'
   # The priority is based upon order of creation:

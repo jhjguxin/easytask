@@ -43,10 +43,11 @@ class ItemsController < ApplicationController
   def create
 #    @item = Item.new(params[:item])
     @task = Task.find(params[:task_id])
-    @item = @task.items.create(params[:item])
-    #redirect_to product_path(@product)
     #breakpoint
+    @item = @task.items.new(params[:item])
 
+ 
+    #breakpoint
 
     respond_to do |format|
       if @item.save
@@ -84,7 +85,7 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url }
+      format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
   end
@@ -108,7 +109,7 @@ class ItemsController < ApplicationController
     #(5 - @task.items.length).times { @task.items.build }
     delete_empty_asset
     respond_to do |format|
-      if @item.save and check_status
+      if @item.save
 #        format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.html { redirect_to @task, notice: 'Item was successfully update.' }
         format.json { render json: @item, status: :created, location: @item }
@@ -128,15 +129,5 @@ class ItemsController < ApplicationController
       end
     end
   end
-  def check_status
-    delete_empty_asset
-    if @item.count==@item.assets.count
-      #breakpoint
-      @item.finished=true
-      @item.save
-    else 
-      @item.finished=false
-      @item.save
-    end
-  end
+
 end

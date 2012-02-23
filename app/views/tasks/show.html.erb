@@ -14,17 +14,17 @@
       <%= s.attribute :name %>
       <%= s.attribute :finished %>
       <%= s.attribute :count %>
-      process:      <%= item.assets.length %>/<%= item.count %>
+      process:      <%= item.assets.length %>/<%= item.count %>  <%= link_to 'Destroy', task_item_path(@task,item), confirm: 'Are you sure?', method: :delete %>
     <% end %>
     <% if item.finished%>
-      <%= item.assets.each do |asset| %>
+      <% item.assets.each do |asset| %>
         <%= show_for asset do |a| %>
         <%= a.attribute :username %>
         <%= a.attribute :url %>
         <% end %>
       <% end %>
     <% else %>
-       Start Work:<%= link_to 'doitem', doitems_path(item.task,item) %> 
+       Start Work:<%= link_to 'doitem', doitems_path(item.task,item) %>| 
     <% end %>
   <% end -%>
 <% end -%>
