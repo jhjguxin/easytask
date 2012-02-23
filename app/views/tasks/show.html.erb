@@ -1,0 +1,42 @@
+<%= show_for @task do |s| %>
+  <%= s.attribute :name %>
+  <%= s.attribute :finished %>
+<% end %>
+
+<h2>Items</h2>
+<div class="items box">
+
+<% if @task.items.empty? -%>
+	<p>There are no items yet.</p>
+<% else -%>
+  <% @task.items.each do |item| -%>
+    <%= show_for item do |s| %>
+      <%= s.attribute :name %>
+      <%= s.attribute :finished %>
+      <%= s.attribute :count %>
+      process:      <%= item.assets.length %>/<%= item.count %>
+    <% end %>
+    <% if item.finished%>
+      <%= item.assets.each do |asset| %>
+        <%= show_for asset do |a| %>
+        <%= a.attribute :username %>
+        <%= a.attribute :url %>
+        <% end %>
+      <% end %>
+    <% else %>
+       Start Work:<%= link_to 'doitem', doitems_path(item.task,item) %> 
+    <% end %>
+  <% end -%>
+<% end -%>
+</div>
+ 
+<h2>Add a Item:</h2>
+<%= simple_form_for(@item, :url =>[@task, @item]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :count %>
+
+  <%= f.button :submit %>
+<% end %>
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

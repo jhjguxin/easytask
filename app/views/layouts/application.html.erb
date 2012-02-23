@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : 'easy task' %></title>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tag %>
+
+    <%= yield(:head) %>
+  </head>
+
+  <body data-controller="<%= params[:controller] %>">
+
+
+    <div class="container">
+ 
+        <%= render :partial => 'common/header' %>
+        <div class="row">
+          <div class="span8 box">
+            <%= render :partial => 'common/flashes' %>
+            <%= yield %>
+          </div>
+          <div class="span4 box">
+             <%= render :partial => 'common/sidebar' %>
+          </div>
+        </div>
+    </div>
+        <footer>
+          <%= render :partial => 'common/footer' %>
+        </footer>
+
+
+
+  </body>
+</html>

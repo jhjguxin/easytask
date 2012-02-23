@@ -1,0 +1,25 @@
+<%= show_for @item do |s| %>
+  <%= s.attribute :name %>
+  <%= s.attribute :count %>
+  <%= s.attribute :finished %>
+  <%= s.association :task %>
+<% end %>
+<div class="add assets box">
+<%= simple_form_for(@item,:url=>updateitem_path(@item.task,@item),:method => :put) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+      <%= f.input :id,:as=>:hidden %>
+  <%= f.fields_for :assets do |asset| %>
+
+      <%= asset.input :username %>
+      <%= asset.input :url%>
+  <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+</div>

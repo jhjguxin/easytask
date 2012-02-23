@@ -1,0 +1,24 @@
+设立一个计划，建立资源目录，填写视频资源的地址，每个条目算作一个任务，然后自由领取任务，配合完成
+修改到完成状态之后就算完成
+    taskA(100%)  
+movie1 1    movie2 2     movie3 3
+p1,1        p1,1 p2,2    p3,1 p1,5,p15
+
+
+    taskA(50%)  
+movie1 1    movie2 2     movie3 3
+p1,1        p1,1 p2,2    
+
+task
+  name
+
+
+
+item
+  task_id
+  count
+asset
+  item_id  
+  url
+  username
+

@@ -1,0 +1,13 @@
+
+
+
+<div class="sidebar_tagcloud box" >
+  <h2>Task</h2>
+  <% unless Task.all.nil? -%>
+    <div id="task">
+    <% Task.all.each do |task| %>
+      <%= link_to task.name, task_path(task) %>
+    <% end %>
+    </div>
+  <% end %>
+

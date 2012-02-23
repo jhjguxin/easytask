@@ -1,0 +1,16 @@
+.bundle
+log/**/*
+log
+solr/
+solr/**/*
+public/system/**/*
+public/system
+tmp/**/*
+tmp
+config/database.yml
+db/schema.rb
+.bundle
+.sass-cache
+.sass-cache/**/*
+*.log
+*~

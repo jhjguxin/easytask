@@ -1,0 +1,9 @@
+<%= show_for item do |s| %>
+  <%= s.attribute :name %>
+  <%= s.attribute :finished %>
+  <%= s.attribute :count %>
+
+<% end %>
+
+<%= link_to 'Edit', edit_item_path(item) %> |
+<%= link_to 'Back', items_path %>
