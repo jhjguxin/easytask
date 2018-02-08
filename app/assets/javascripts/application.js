@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
 $ 
   $links = $('body').find('a')
   $links.each (i , e) 

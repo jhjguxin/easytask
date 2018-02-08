@@ -41,10 +41,10 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-#    @item = Item.new(params[:item])
+#    @item = Item.new(item_params)
     @task = Task.find(params[:task_id])
     #breakpoint
-    @item = @task.items.new(params[:item])
+    @item = @task.items.new(item_params)
 
  
     #breakpoint
@@ -68,7 +68,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |format|
-      if @item.update_attributes(params[:item])
+      if @item.update_attributes(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
@@ -92,7 +92,7 @@ class ItemsController < ApplicationController
   # GET /items/doitem
   # GET /items.json
   def doitem
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
     @task = Task.find(params[:task_id])
     #breakpoint
     #(5 - @task.items.length).times { @task.items.build }
@@ -102,10 +102,10 @@ class ItemsController < ApplicationController
   end
 
   def updateitem
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
     @task = Task.find(params[:task_id])
     #breakpoint
-    @item.update_attributes(params[:item])
+    @item.update_attributes(item_params)
     #(5 - @task.items.length).times { @task.items.build }
     delete_empty_asset
     respond_to do |format|
@@ -121,7 +121,16 @@ class ItemsController < ApplicationController
       end
     end
   end
-  protected
+  
+  private
+  def item_params
+    params.require(:item).permit(
+      :name, :count, :task_id, :finished,
+      assets_attributes: [
+        :id, :username, :url
+      ]
+    )
+  end
   def delete_empty_asset
     @item.assets.each do |a|
       if a.username=='' or a.url==''
